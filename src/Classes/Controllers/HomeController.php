@@ -13,19 +13,15 @@ error_reporting(E_ALL);
 class HomeController
 {
     public function __construct() {
-        // if (empty($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-        //     Flight::view()->display('access.tpl');
-        //     exit;
-        // }
+        // Bounce the user if they aren't logged in
+        if (empty($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+            Flight::view()->display('access.tpl');
+            exit;
+        }
     }
     
     public function index()
     {
-        // $translate = new Translate();
-        // $originalText = "Hei maalima!";
-        // $translatedText = $translate->translate($originalText, 'fi', 'en');
-        // echo "Original: $originalText\n" .
-		// " Translated: $translatedText\n";
         Flight::view()->assign('name', 'Bob');
         Flight::view()->display('home.tpl');
     }

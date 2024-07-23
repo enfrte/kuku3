@@ -11,7 +11,7 @@ class AccessController
 	}
     public function index()
     {
-		if (!empty($_POST['password']) && $_POST['password'] == 'asdf') {
+		if (!empty($_POST['password']) && $_POST['password'] == 'asdf' || isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 			$_SESSION['logged_in'] = true;
 			Flight::redirect('/home');
 		}
