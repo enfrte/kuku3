@@ -3,6 +3,7 @@
 namespace Kuku3\Classes;
 
 use GuzzleHttp\Client;
+use Flight;
 
 class Translate 
 {
@@ -13,7 +14,7 @@ class Translate
         $this->client = new Client();
     }
 	
-	function translate($text, $sourceLang = 'auto', $targetLang = 'en') {
+	function googleTranslate($text, $sourceLang = 'fi', $targetLang = 'en') {
 		$url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl={$sourceLang}&tl={$targetLang}&dt=t&q=" . urlencode($text);
 	
         $response = $this->client->request('GET', $url);
@@ -23,8 +24,13 @@ class Translate
 		$translatedTextArray = json_decode($responseBody, true);
 		$translatedText = $translatedTextArray[0][0][0];
 	
-		return $translatedText;
+		// return $translatedText;
+		Flight::view()->assign('translatedText', $translatedText);
+        Flight::view()->display('home.tpl');
 	}
-	
+
+	function newTranslation() {
+		Flight::view()->display('new-translation.tpl');		
+	}
 }
 

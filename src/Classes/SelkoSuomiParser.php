@@ -15,17 +15,25 @@ class SelkoSuomiParser
         $this->client = new Client();
     }
 	
-	function parse(string $url) {
+	public function getLatestNews() {
+        $url = 'https://yle.fi/selkouutiset';
         $response = $this->client->request('GET', $url);
 		$responseBody = $response->getBody()->getContents();
-
 		
 		$doc = new DOMDocument();
-        @$doc->loadHTML($responseBody); // The @ suppresses warnings due to malformed HTML
+        // @$doc->loadHTML($responseBody); // The @ suppresses warnings due to malformed HTML
+        @$doc->loadHTML(mb_convert_encoding($responseBody, 'HTML-ENTITIES', 'UTF-8'));
+
         $xpath = new DOMXPath($doc);
 
         $content = [];
 
+        // The date of the article
+        $dateNode = $xpath->query('//article//h1[contains(@class, "yle__article__heading")]');
+        if ($dateNode->length > 0) {
+            $content[] = trim($dateNode->item(0)->nodeValue) . ".";
+        }
+        
         // Fetch the title (first .yle__article__paragraph)
         $titleNode = $xpath->query('//article//p[contains(@class, "yle__article__paragraph")][1]');
         if ($titleNode->length > 0) {
@@ -40,10 +48,17 @@ class SelkoSuomiParser
             if ($index == 0 && strpos($node->getAttribute('class'), 'yle__article__paragraph')) {
                 continue;
             }
-            $content[] = trim($node->nodeValue);
+            if (strpos($node->getAttribute('class'), 'yle__article__heading')) {
+                $content[] = trim($node->nodeValue) . ".";
+            }
+            else {
+                $content[] = trim($node->nodeValue);
+            }
         }
 
-        return $content;
+        $contentToText = implode("\n", $content);
+
+        echo $contentToText;
 	}
 
 }
