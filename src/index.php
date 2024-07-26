@@ -23,12 +23,12 @@ Flight::register('view', Smarty::class, [], function (Smarty $smarty) {
   $smarty->setCacheDir('./cache/');
 });
   
-Flight::route('/', [new AccessController, 'index']);
-Flight::route('/logout', [new AccessController, 'logout']);
-Flight::route('/translation', [new Translate, 'newTranslation']);
-Flight::route('/translate', [new Translate, 'googleTranslate']);
-Flight::route('/home', [new HomeController, 'index']);
-Flight::route('/get_latest_news', [new SelkoSuomiParser, 'getLatestNews']);
+Flight::route('/', [AccessController::class, 'index']);
+Flight::route('/logout', [AccessController::class, 'logout']);
+Flight::route('/translation', [Translate::class, 'newTranslation']);
+Flight::route('/translate', [Translate::class, 'googleTranslate']);
+Flight::route('/home', [HomeController::class, 'index']);
+Flight::route('/get_latest_news', [SelkoSuomiParser::class, 'getLatestNews']);
 
 
 Flight::start();
