@@ -8,27 +8,29 @@
 						hx-target="#source"
 						type="button" 
 						class="btn btn-primary">
-						Fetch latest yle news
+						1. Fetch latest yle news
 					</button>
-					<button type="button" class="btn btn-info">Format text</button>
+					<button onclick="splitSentences('source')" type="button" class="btn btn-info">2. Format text</button>
 					<button 
 						hx-get="/kuku3/src/translate" 
 						hx-target="#source"
 						type="button" 
 						class="btn btn-warning">
-						Translate
+						3. Translate
 					</button>
-					<button type="button" class="btn btn-success">Save</button>
+					<button type="button" class="btn btn-success">4. Save</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<textarea id="source" class="form-control" style="height: 650px;"></textarea>
+			<textarea oninput="autoResize(this)" id="source" class="form-control" style="height: 650px;"></textarea>
 		</div>
 		<div class="col-md-6">
-			<textarea id="translation" class="form-control" style="height: 650px;"></textarea>
+			<textarea oninput="autoResize(this)" id="translation" class="form-control" style="height: 650px;"></textarea>
 		</div>
 	</div>
 </div>
+
+<script src="/kuku3/src/assets/js/main.js"></script>

@@ -9,9 +9,11 @@
 			"type": "php",
 			"request": "launch",
 			"port": 9003,
-			"var_display_max_children": -1,
-			"var_display_max_data": -1,
-			"var_display_max_depth": -1
+			"xdebugSettings": {
+				"max_children": -1,
+				"max_data": -1,
+				"max_depth": -1
+			}
 		},
 		{
 			"name": "Launch currently open script",
