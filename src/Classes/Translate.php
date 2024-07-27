@@ -32,9 +32,7 @@ class Translate
 			}
 		}
 	
-		echo $translatedText;
-		// Flight::latte()->assign('translatedText', $translatedText);
-        // Flight::latte()->render('home.latte', ['translatedText' => $translatedText]);
+		Flight::htmxResponse()->sendHtml($translatedText);
 	}
 
 	function newTranslation() {

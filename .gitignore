@@ -1,2 +1,4 @@
 /vendor/
-templates_c
+/cache/
+installed
+database.sqlite

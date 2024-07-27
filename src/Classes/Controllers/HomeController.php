@@ -15,8 +15,8 @@ class HomeController
     public function __construct() {
         // Bounce the user if they aren't logged in
         if (empty($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-            // Flight::view()->display('access.latte');
-            // exit;
+            Flight::latte()->render('access.latte');
+            exit;
         }
     }
     

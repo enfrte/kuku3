@@ -5,6 +5,7 @@ namespace Kuku3\Classes;
 use GuzzleHttp\Client;
 use DOMDocument;
 use DOMXPath;
+use Flight;
 
 class SelkoSuomiParser 
 {
@@ -57,8 +58,7 @@ class SelkoSuomiParser
         }
 
         $contentToText = implode("\n", $content);
-
-        echo $contentToText;
+        Flight::htmxResponse()->sendHtml($contentToText);
 	}
 
 }
