@@ -9,6 +9,6 @@
         "propel/propel": "~2.0@beta",
         "guzzlehttp/guzzle": "^7.9",
         "flightphp/core": "^3.11",
-        "smarty/smarty": "^5.3"
+        "latte/latte": "^3.0"
     }
 }

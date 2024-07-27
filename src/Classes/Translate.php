@@ -14,7 +14,8 @@ class Translate
         $this->client = new Client();
     }
 	
-	function googleTranslate($text, $sourceLang = 'fi', $targetLang = 'en') {
+	function googleTranslate(string $sourceLang = 'fi', string $targetLang = 'en') {
+		$text = Flight::request()->data->source;
 		$url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl={$sourceLang}&tl={$targetLang}&dt=t&q=" . urlencode($text);
 	
         $response = $this->client->request('GET', $url);
@@ -22,15 +23,22 @@ class Translate
 	
 		// Google returns a complex JSON, we need to extract the translated text
 		$translatedTextArray = json_decode($responseBody, true);
-		$translatedText = $translatedTextArray[0][0][0];
+		// $translatedText = $translatedTextArray[0][0][0];
+
+		$translatedText = '';
+		if (isset($translatedTextArray[0])) {
+			foreach ($translatedTextArray[0] as $sentence) {
+				$translatedText .= $sentence[0];
+			}
+		}
 	
-		// return $translatedText;
-		Flight::view()->assign('translatedText', $translatedText);
-        Flight::view()->display('home.tpl');
+		echo $translatedText;
+		// Flight::latte()->assign('translatedText', $translatedText);
+        // Flight::latte()->render('home.latte', ['translatedText' => $translatedText]);
 	}
 
 	function newTranslation() {
-		Flight::view()->display('new-translation.tpl');		
+		Flight::latte()->render('new-translation.latte');
 	}
 }
 

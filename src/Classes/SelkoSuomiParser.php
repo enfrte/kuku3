@@ -37,7 +37,7 @@ class SelkoSuomiParser
         // Fetch the title (first .yle__article__paragraph)
         $titleNode = $xpath->query('//article//p[contains(@class, "yle__article__paragraph")][1]');
         if ($titleNode->length > 0) {
-            $content[] = trim($titleNode->item(0)->nodeValue);
+            $content[] = trim($titleNode->item(0)->nodeValue) . ".";
         }
 
         // Fetch subheadings (.yle__article__heading) and other paragraphs (.yle__article__paragraph)

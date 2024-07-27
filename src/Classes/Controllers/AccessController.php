@@ -17,12 +17,13 @@ class AccessController
 		}
 		else {
 			// sleep(5); // will this help against brute force?
-			Flight::view()->display('access.tpl');
+			Flight::latte()->render('access.latte');
 		}
     }
 
 	function logout() {
 		$_SESSION['logged_in'] = false;
-		Flight::view()->display('access.tpl');
+		Flight::latte()->render('access.latte');
+		// Flight::latte()->display('access.latte');
 	}
 }

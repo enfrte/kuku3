@@ -15,15 +15,14 @@ class HomeController
     public function __construct() {
         // Bounce the user if they aren't logged in
         if (empty($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-            // Flight::view()->display('access.tpl');
+            // Flight::view()->display('access.latte');
             // exit;
         }
     }
     
     public function index()
     {
-        Flight::view()->assign('name', 'Bob');
-        Flight::view()->display('home.tpl');
+        Flight::latte()->render('home.latte', []);
     }
 
 }

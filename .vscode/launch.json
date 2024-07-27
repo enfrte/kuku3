@@ -12,7 +12,7 @@
 			"xdebugSettings": {
 				"max_children": -1,
 				"max_data": -1,
-				"max_depth": -1
+				"max_depth": 4
 			}
 		},
 		{

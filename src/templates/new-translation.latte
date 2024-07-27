@@ -1,4 +1,7 @@
-<div class="container-fluid pt-5" style="height: 100vh;">
+{layout 'layout.latte'}
+
+{block content}
+<div class="container-fluid pt-4" style="height: 100vh;">
 	<div class="row">
 		<div class="col">
 			<div class="d-flex flex-row mb-2">
@@ -12,8 +15,9 @@
 					</button>
 					<button onclick="splitSentences('source')" type="button" class="btn btn-info">2. Format text</button>
 					<button 
-						hx-get="/kuku3/src/translate" 
-						hx-target="#source"
+§						hx-post="/kuku3/src/translate" 
+						hx-target="#translation"
+						hx-include="#source"
 						type="button" 
 						class="btn btn-warning">
 						3. Translate
@@ -24,13 +28,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
-			<textarea oninput="autoResize(this)" id="source" class="form-control" style="height: 650px;"></textarea>
+		<div class="col-md-6 pt-3">
+			<textarea oninput="autoResize(this)" id="source" name="source" class="form-control" style="height: 650px;"></textarea>
 		</div>
-		<div class="col-md-6">
-			<textarea oninput="autoResize(this)" id="translation" class="form-control" style="height: 650px;"></textarea>
+		<div class="col-md-6 pt-3">
+			<textarea oninput="autoResize(this)" id="translation" name="translation" class="form-control" style="height: 650px;"></textarea>
 		</div>
 	</div>
 </div>
-
-<script src="/kuku3/src/assets/js/main.js"></script>
+{/block}
