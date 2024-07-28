@@ -3,6 +3,7 @@
 namespace Kuku3\Classes\Controllers;
 
 use Flight;
+use Kuku3\Classes\Security;
 
 class AccessController
 {
@@ -11,7 +12,10 @@ class AccessController
 	}
     public function index()
     {
-		if (isset($_POST['password']) && $_POST['password'] == 'asdf' || isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+		$submitted_password = !empty($_POST['password']) ? $_POST['password'] : false;
+		$config = Flight::configData();
+
+		if ($submitted_password == $config['app_password'] || Security::isAuthenticated()) {
 			$_SESSION['logged_in'] = true;
 			Flight::redirect('/home');
 		}

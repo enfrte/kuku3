@@ -5,6 +5,7 @@ namespace Kuku3\Classes\Controllers;
 // use Kuku3\Classes\Translate; 
 // use Smarty\Smarty;
 use Flight;
+use Kuku3\Classes\Security;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -14,10 +15,7 @@ class HomeController
 {
     public function __construct() {
         // Bounce the user if they aren't logged in
-        if (empty($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-            Flight::latte()->render('access.latte');
-            exit;
-        }
+        Security::authCheck();
     }
     
     public function index()

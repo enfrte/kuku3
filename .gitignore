@@ -2,3 +2,5 @@
 /cache/
 installed
 database.sqlite
+/src/config/config.php
+src/config/config.php

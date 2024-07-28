@@ -4,6 +4,7 @@ namespace Kuku3\Classes;
 
 use GuzzleHttp\Client;
 use Flight;
+use Kuku3\Classes\Security;
 
 class Translate 
 {
@@ -11,6 +12,7 @@ class Translate
 
     public function __construct()
     {
+		Security::authCheck();
         $this->client = new Client();
     }
 	

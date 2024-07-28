@@ -4,6 +4,7 @@ namespace Kuku3\Classes\Controllers;
 
 use Flight;
 use PDO;
+use Kuku3\Classes\Security;
 
 class InstallController 
 {
@@ -12,6 +13,8 @@ class InstallController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
+
+		Security::authCheck();
 
 		if ( empty($_SESSION['logged_in']) || $_SESSION['logged_in'] == false ) { 
 			die('Requires access.');

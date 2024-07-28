@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use DOMDocument;
 use DOMXPath;
 use Flight;
+use Kuku3\Classes\Security;
 
 class SelkoSuomiParser 
 {
@@ -13,6 +14,7 @@ class SelkoSuomiParser
 
     public function __construct()
     {
+        Security::authCheck();
         $this->client = new Client();
     }
 	
