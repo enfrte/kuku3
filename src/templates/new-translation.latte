@@ -22,7 +22,13 @@
 						class="btn btn-warning">
 						3. Translate
 					</button>
-					<button type="button" class="btn btn-success">4. Save</button>
+					<button 
+						hx-post="/kuku3/src/saveTranslation" 
+						hx-include="#source, #translation"
+						type="button" 
+						class="btn btn-success">
+						4. Save
+					</button>
 				</div>
 			</div>
 		</div>

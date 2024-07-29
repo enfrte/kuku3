@@ -9,6 +9,7 @@ use Kuku3\Classes\SelkoSuomiParser;
 use Kuku3\Classes\Translate;
 use Latte\Engine as LatteEngine;
 use flight\net\Response;
+use flight\database\PdoWrapper;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -47,17 +48,20 @@ Flight::map('htmxResponse', function() {
 });
 
 // Register the PDO helper class
-Flight::register('db', \flight\database\PdoWrapper::class, ['sqlite:database.sqlite', [
-    // "PRAGMA STRICT = ON;",
-    // "PRAGMA foreign_keys = ON;",
-    // "PRAGMA auto_vacuum = FULL;",
-    // "PRAGMA ignore_check_constraints = FALSE;",
+Flight::register('db', PdoWrapper::class, ['sqlite:database.sqlite', '', '', [
+    // PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8mb4\'',
+    // PDO::ATTR_EMULATE_PREPARES => false,
+    // PDO::ATTR_STRINGIFY_FETCHES => false,
+    // PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]]);
 
 Flight::route('/', [AccessController::class, 'index']);
 Flight::route('/logout', [AccessController::class, 'logout']);
 Flight::route('/translation', [Translate::class, 'newTranslation']);
 Flight::route('/translate', [Translate::class, 'googleTranslate']);
+Flight::route('/practiceInfo', [Translate::class, 'getLatestPracticeInfo']);
+Flight::route('/practice', [Translate::class, 'getLatestPractice']);
+Flight::route('/saveTranslation', [Translate::class, 'saveTranslation']);
 Flight::route('/home', [HomeController::class, 'index']);
 Flight::route('/get_latest_news', [SelkoSuomiParser::class, 'getLatestNews']);
 Flight::route('/install', [InstallController::class, 'index']);
