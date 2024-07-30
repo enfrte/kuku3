@@ -13,11 +13,12 @@ class Translate
 
     public function __construct()
     {
-		Security::authCheck();
         $this->client = new Client();
     }
 	
 	function googleTranslate(string $sourceLang = 'fi', string $targetLang = 'en') {
+		Security::authCheck();
+
 		$text = Flight::request()->data->source;
 		$url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl={$sourceLang}&tl={$targetLang}&dt=t&q=" . urlencode($text);
 	
@@ -39,10 +40,13 @@ class Translate
 	}
 
 	function newTranslation() {
+		Security::authCheck();
 		Flight::latte()->render('new-translation.latte');
 	}
 
 	public function saveTranslation() {
+		Security::authCheck();
+
 		$source = Flight::request()->data->source;
 		$translation = Flight::request()->data->translation;
 		

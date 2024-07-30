@@ -2,7 +2,17 @@
 
 {block content}
 
-<h2>Practice</h2>
-{if !empty($title)}{$title}{/if}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+	<div class="text-center">
+		<h2>Practice</h2>
+		{if !empty($title)}
+			<a href="/kuku3/src/practice" class="btn btn-primary btn-lg btn-block mt-3">
+				{$title}
+			</a>
+		{else}
+			<p class="lead">Could not fetch practice.</p>
+		{/if}
+	</div>
+</div>
 
 {/block}

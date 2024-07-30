@@ -5,15 +5,17 @@
 	let questions = JSON.parse({$questions}); 
 	console.log(questions);
 </script>
-<div x-data='{ questions: {$questions} }'>
+<div class="container" x-data='{ questions: {$questions} }'>
 	<div x-data="getLatestPracticeData()" class="pt-2">
 
 		<div class="progress-container pt-3 d-flex align-items-center justify-content-between">
-			<div 
-				class="btn btn-lg pt-1 pb-1 ps-0 me-2" 
-				type="button">
-				<span class="bi bi-x-lg text-dark"></span>
-			</div>
+			<a href="/kuku3/src/practiceInfo" class="text-dark text-decoration-none">
+				<div 
+					class="btn btn-lg pt-1 pb-1 ps-0 me-2" 
+					type="button">
+					<span class="bi bi-x-lg"></span>
+				</div>
+			</a>
 
 			<div class="progress-bar-container d-block w-100">
 				<div class="progress">
