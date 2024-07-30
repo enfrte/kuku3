@@ -2,4 +2,4 @@
 /cache/
 installed
 database.sqlite
-/src/config/config.php
+/www/config/config.php

@@ -2,7 +2,7 @@
     "name": "me/kuku3",
     "autoload": {
         "psr-4": {
-            "Kuku3\\": "src/"
+            "Kuku3\\": "www/"
         }
     },
     "require": {
