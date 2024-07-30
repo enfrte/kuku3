@@ -7,7 +7,7 @@
 			<div class="d-flex flex-row mb-2">
 				<div class="btn-group w-100" role="group" aria-label="Button group">
 					<button 
-						hx-get="/kuku3/src/get_latest_news" 
+						hx-get="{Flight::get('basePath')}/get_latest_news" 
 						hx-target="#source"
 						type="button" 
 						class="btn btn-primary">
@@ -15,7 +15,7 @@
 					</button>
 					<button onclick="splitSentences('source')" type="button" class="btn btn-info">2. Format text</button>
 					<button 
-§						hx-post="/kuku3/src/translate" 
+§						hx-post="{Flight::get('basePath')}/translate" 
 						hx-target="#translation"
 						hx-include="#source"
 						type="button" 
@@ -23,7 +23,7 @@
 						3. Translate
 					</button>
 					<button 
-						hx-post="/kuku3/src/saveTranslation" 
+						hx-post="{Flight::get('basePath')}/saveTranslation" 
 						hx-include="#source, #translation"
 						type="button" 
 						class="btn btn-success">

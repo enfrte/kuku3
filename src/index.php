@@ -15,11 +15,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+$app = Flight::app();
+
+// HOST SETTINGS
+// $app->set('basePath', Flight::request()->base . '/www/kuku3'); // Host: AlwaysData 
+$app->set('basePath', Flight::request()->base . ''); // Host: XAMPP local dev
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-
-$app = Flight::app();
 
 Flight::map('configData', function() {
     static $config;
@@ -34,6 +38,7 @@ $app->register('latte', LatteEngine::class, [], function(LatteEngine $latte) use
     // Tell Latte where the root directory for your views will be at.
     // $latte->setLoader(new \Latte\Loaders\FileLoader($app->get('/templates')));
     $latte->setLoader(new \Latte\Loaders\FileLoader('templates'));
+
 });
 
 // Return custom htmx responses
