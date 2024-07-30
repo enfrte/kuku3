@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php'; // autoload the classes
+require '../../vendor/autoload.php'; // autoload the classes
 
 use Kuku3\Classes\Controllers\HomeController;
 use Kuku3\Classes\Controllers\AccessController;
@@ -28,13 +28,13 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 Flight::map('configData', function() {
     static $config;
     if (!$config) {
-        $config = require __DIR__ . '/config/config.php';
+        $config = require __DIR__ . '/../../kuku3_config/config.php';
     }
     return $config;
 });
 
 $app->register('latte', LatteEngine::class, [], function(LatteEngine $latte) use ($app) {
-    $latte->setTempDirectory(__DIR__ . '/../cache/');
+    $latte->setTempDirectory(__DIR__ . '/cache');
     // Tell Latte where the root directory for your views will be at.
     // $latte->setLoader(new \Latte\Loaders\FileLoader($app->get('/templates')));
     $latte->setLoader(new \Latte\Loaders\FileLoader('templates'));
