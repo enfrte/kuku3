@@ -2,6 +2,9 @@
 
 Interactive language learning
 
+Demo: https://codinginthecold.alwaysdata.net/kuku3/practiceInfo
+
+
 ### Dev tips
 
 For AlwaysData hosting comment out the .htaccess Redirect line. 
