@@ -1,5 +1,5 @@
-/vendor/
+/kuku3root/vendor/
 /cache/
 installed
 database.sqlite
-/kuku3_config/config.php
+/kuku3root/config.php

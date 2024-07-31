@@ -1,6 +1,6 @@
 <?php
 
-require '../../vendor/autoload.php'; // autoload the classes
+require __DIR__ . '/../../kuku3root/vendor/autoload.php'; // autoload the classes
 
 use Kuku3\Classes\Controllers\HomeController;
 use Kuku3\Classes\Controllers\AccessController;
@@ -11,14 +11,13 @@ use Latte\Engine as LatteEngine;
 use flight\net\Response;
 use flight\database\PdoWrapper;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 $app = Flight::app();
 
 // HOST SETTINGS
-// $app->set('basePath', Flight::request()->base . '/www/kuku3'); // Host: AlwaysData 
 $app->set('basePath', Flight::request()->base . ''); // Host: XAMPP local dev
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -28,7 +27,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 Flight::map('configData', function() {
     static $config;
     if (!$config) {
-        $config = require __DIR__ . '/../../kuku3_config/config.php';
+        $config = require __DIR__ . '/../../kuku3root/config.php';
     }
     return $config;
 });
@@ -36,9 +35,7 @@ Flight::map('configData', function() {
 $app->register('latte', LatteEngine::class, [], function(LatteEngine $latte) use ($app) {
     $latte->setTempDirectory(__DIR__ . '/cache');
     // Tell Latte where the root directory for your views will be at.
-    // $latte->setLoader(new \Latte\Loaders\FileLoader($app->get('/templates')));
     $latte->setLoader(new \Latte\Loaders\FileLoader('templates'));
-
 });
 
 // Return custom htmx responses
