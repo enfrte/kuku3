@@ -1,0 +1,14 @@
+{
+    "name": "me/kuku3",
+    "autoload": {
+        "psr-4": {
+            "Kuku3\\": "../www/kuku3/"
+        }
+    },
+    "require": {
+        "propel/propel": "~2.0@beta",
+        "guzzlehttp/guzzle": "^7.9",
+        "flightphp/core": "^3.11",
+        "latte/latte": "^3.0"
+    }
+}
