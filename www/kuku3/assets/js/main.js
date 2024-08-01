@@ -23,3 +23,5 @@ function autoResize(textarea) {
 	textarea.style.height = 'auto'; // Reset the height to auto to calculate the new height
 	textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to match the content
 }
+
+

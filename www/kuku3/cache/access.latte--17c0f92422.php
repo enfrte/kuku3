@@ -34,18 +34,19 @@ final class Template_17c0f92422 extends Latte\Runtime\Template
 	/** {block content} on line 3 */
 	public function blockContent(array $ʟ_args): void
 	{
-		echo '<div class="container mt-5">
+		echo '<div class="container mt-5 bg-dark text-white">
 	<h2 class="mb-5">Admin login</h2>
 	<form hx-post="';
 		echo LR\Filters::escapeHtmlAttr(Flight::get('basePath')) /* line 6 */;
-		echo '/" hx-target="body" hx-trigger="submit" class="row g-3">
+		echo '/" hx-target="body" hx-trigger="submit" class="row g-3 text-white">
 		<div class="col-auto">
-		<input name="password" type="password" class="form-control" placeholder="Password" autofocus>
+			<input name="password" type="password" class="form-control bg-dark text-white" placeholder="Password" autofocus>
+		</div>
 	</form>
-	<p class="mt-3">
+	<p class="mt-3 text-white">
 		Looking for finnish practice? <a href="';
-		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 11 */;
-		echo '/practiceInfo">Click here</a>
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 12 */;
+		echo '/practiceInfo" class="text-white">Click here</a>
 	</p>
 </div>
 ';

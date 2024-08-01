@@ -64,6 +64,9 @@ final class Template_b662409b4f extends Latte\Runtime\Template
 		echo LR\Filters::escapeHtmlAttr(Flight::get('basePath')) /* line 26 */;
 		echo '/saveTranslation" 
 						hx-include="#source, #translation"
+						hx-trigger="click" 
+						
+						hx-swap="innerHTML"
 						type="button" 
 						class="btn btn-success">
 						4. Save

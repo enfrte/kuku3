@@ -2,9 +2,12 @@
 
 namespace Kuku3\Classes;
 
-use GuzzleHttp\Client;
 use Kuku3\Classes\Security;
+use Kuku3\Classes\Controllers\ToastException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use Flight;
+use DateTime;
 use PDO;
 
 class Translate 
@@ -45,37 +48,67 @@ class Translate
 	}
 
 	public function saveTranslation() {
-		Security::authCheck();
+		try {
+			Security::authCheck();
 
-		$source = Flight::request()->data->source;
-		$translation = Flight::request()->data->translation;
-		
-		$sourceSentences = explode("\n", $source);
-		$translationSentences = explode("\n", $translation);
+			$source = Flight::request()->data->source;
+			$translation = Flight::request()->data->translation;
+			
+			if (empty($source) || empty($translation)) {
+				throw new \Exception('Source or translation must not be empty');
+			}
 
-		if (empty($sourceSentences) || empty($translationSentences)) {
-			throw new \Exception('Source or translation must not be empty');
+			$sourceSentences = explode("\n", $source);
+			$translationSentences = explode("\n", $translation);
+
+			if (count($sourceSentences) !== count($translationSentences)) {
+				throw new \Exception('Source and translation must have equal line length');
+			}
+
+			$dbFormattedDate = $this->extractAndFormatDate($sourceSentences[0]);
+
+			$db = Flight::db();
+			$sql = 'SELECT MAX(timestamp) FROM translations';
+			$maxDate = $db->fetchField($sql); // fetchField pulls the first field from the query
+			
+			if ($maxDate == $dbFormattedDate) {
+				throw new \Exception('You can only save a translation once per day');
+			}
+
+			$combined_sentences = array_combine(array_map('trim', $sourceSentences), array_map('trim', $translationSentences));
+			$db = Flight::db();
+
+			foreach($combined_sentences as $sourceSentence => $translationSentence) {
+				$db->runQuery("INSERT INTO translations (timestamp, source_line, translation_line) VALUES (?, ?, ?)", [$dbFormattedDate,  $sourceSentence, $translationSentence ]);
+			}
+
+			Flight::htmxResponse()->sendHtml('Saved');	
+		} catch (\Exception $e) {
+			new ToastException($e);
 		}
 
-		if (count($sourceSentences) !== count($translationSentences)) {
-			throw new \Exception('Source and translation must have equal line length');
+	}
+
+	private function extractAndFormatDate($sentence) {
+		// Define regex patterns
+		$patterns = [
+			'/(\d{1,2})-(\d{1,2})-(\d{4})/',
+			'/(\d{1,2}).(\d{1,2}).(\d{4})/'
+		];
+
+		foreach ($patterns as $pattern) {
+			if (preg_match($pattern, $sentence, $matches)) {
+				$day = $matches[1];
+				$month = $matches[2];
+				$year = $matches[3];
+				
+				$date = DateTime::createFromFormat('d-m-Y', "$day-$month-$year");
+				return $date->format('Y-m-d');
+			}
 		}
 
-		$db = Flight::db();
-		$sql = 'SELECT MAX(timestamp) FROM translations';
-		$maxDate = $db->fetchField($sql); // fetchField pulls the first field from the query
-		$today = date('Y-m-d');
-		
-		if ($maxDate == $today) {
-			throw new \Exception('You can only save a translation once per day');
-		}
-
-		$combined_sentences = array_combine(array_map('trim', $sourceSentences), array_map('trim', $translationSentences));
-		$db = Flight::db();
-
-		foreach($combined_sentences as $sourceSentence => $translationSentence) {
-			$db->runQuery("INSERT INTO translations (source_line, translation_line) VALUES (?, ?)", [ $sourceSentence, $translationSentence ]);
-		}
+		// Last resort, return current date
+		return date('Y-m-d');
 	}
 
 	public function getLatestPracticeData() {

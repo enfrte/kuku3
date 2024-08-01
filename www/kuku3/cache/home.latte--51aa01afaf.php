@@ -34,31 +34,31 @@ final class Template_51aa01afaf extends Latte\Runtime\Template
 	/** {block content} on line 3 */
 	public function blockContent(array $ʟ_args): void
 	{
-		echo '<div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+		echo '<div class="d-flex flex-column justify-content-center align-items-center bg-dark" style="height: 100vh;">
 	<a href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 5 */;
-		echo '/translation" style="min-width: 100%; text-decoration: none;">
-		<div class="p-3 menu-item text-white bg-dark" style="min-width: 100%;">
+		echo '/translation" class="text-white text-decoration-none" style="min-width: 100%;">
+		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
-				<h5 class="card-title mb-0 text-center">NEW TRANSLATION</h5>
+				<h5 class="card-title mb-0 text-center text-white">NEW TRANSLATION</h5>
 			</div>
 		</div>
 	</a>
 	<a href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 12 */;
-		echo '/practice" style="min-width: 100%; text-decoration: none;">
-		<div class="p-3 menu-item text-white bg-dark">
+		echo '/practice" class="text-white text-decoration-none" style="min-width: 100%;">
+		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
-				<h5 class="card-title mb-0 text-center">PRACTICE</h5>
+				<h5 class="card-title mb-0 text-center text-white">PRACTICE</h5>
 			</div>
 		</div>
 	</a>
 	<a href="';
 		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 19 */;
-		echo '/logout" style="min-width: 100%; text-decoration: none;">
-		<div class="p-3 menu-item text-white bg-dark">
+		echo '/logout" class="text-white text-decoration-none" style="min-width: 100%;">
+		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
-				<h5 class="card-title mb-0 text-center">LOG OUT</h5>
+				<h5 class="card-title mb-0 text-center text-white">LOG OUT</h5>
 			</div>
 		</div>
 	</a>
