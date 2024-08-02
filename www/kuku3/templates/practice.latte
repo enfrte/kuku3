@@ -68,7 +68,7 @@
 		<div class="d-grid">
 			<button 
 				:disabled="answerArray.length < 1" 
-				class="btn btn-lg bt-100 btn-success bg-lightgreen rounded-4 text-black mt-3" 
+				class="btn btn-lg bt-100 btn-success bg-lightgreen rounded-4 text-black fw-bold mt-3" 
 				x-on:click="checkAnswer()">
 				CHECK
 			</button>
@@ -84,7 +84,7 @@
 					<h3 x-text="result" class="text-light"></h3>
 					<p x-text="resultMessage" class="text-light"></p>
 					<button 
-						class="btn btn-light btn-lg btn-block mt-auto mb-4"
+						class="btn btn-light btn-lg btn-block fw-bold mt-auto mb-4"
 						x-on:click="nextQuestion">
 						CONTINUE
 					</button>
@@ -101,7 +101,7 @@
 					<h3 class="text-light">Practice complete</h3>
 					<p class="text-light">Return to the practice index. Check back tomorrow for updated practices.</p>
 					<a href="{Flight::get('basePath')}/practiceInfo" 
-						class="btn btn-primary btn-lg btn-block mt-auto mb-4" 
+						class="btn btn-primary btn-lg btn-block fw-bold mt-auto mb-4" 
 						role="button">
 						EXIT
 					</a>

@@ -39,12 +39,12 @@ final class Template_e823e65804 extends Latte\Runtime\Template
 		unset($ʟ_args);
 
 		echo '<script>
-	let questions = JSON.parse(';
+	// let questions = JSON.parse(';
 		echo LR\Filters::escapeJs($questions) /* line 5 */;
 		echo '); 
-	console.log(questions);
+	// console.log(questions);
 </script>
-<div class="container" x-data=\'{ questions: ';
+<div class="container bg-light" style="height: 100vh;" x-data=\'{ questions: ';
 		echo LR\Filters::escapeHtmlAttr($questions) /* line 8 */;
 		echo ' }\'>
 	<div x-data="getLatestPracticeData()" class="pt-2">
@@ -111,7 +111,7 @@ final class Template_e823e65804 extends Latte\Runtime\Template
 		<div class="d-grid">
 			<button 
 				:disabled="answerArray.length < 1" 
-				class="btn btn-lg bt-100 btn-success bg-lightgreen rounded-4 text-black mt-3" 
+				class="btn btn-lg bt-100 btn-success bg-lightgreen rounded-4 text-black fw-bold mt-3" 
 				x-on:click="checkAnswer()">
 				CHECK
 			</button>
@@ -127,7 +127,7 @@ final class Template_e823e65804 extends Latte\Runtime\Template
 					<h3 x-text="result" class="text-light"></h3>
 					<p x-text="resultMessage" class="text-light"></p>
 					<button 
-						class="btn btn-light btn-lg btn-block mt-auto mb-4"
+						class="btn btn-light btn-lg btn-block fw-bold mt-auto mb-4"
 						x-on:click="nextQuestion">
 						CONTINUE
 					</button>
@@ -141,21 +141,18 @@ final class Template_e823e65804 extends Latte\Runtime\Template
 			style="height: 200px;">
 			<div class="container h-100">
 				<div class="row h-100 align-items-end justify-content-center">
-					<h3 class="text-light">Lesson complete</h3>
-					<p class="text-light">Exit and return to the lesson index.</p>
-					<button 
-						class="btn btn-primary btn-lg btn-block mt-auto mb-4">
+					<h3 class="text-light">Practice complete</h3>
+					<p class="text-light">Return to the practice index. Check back tomorrow for updated practices.</p>
+					<a href="';
+		echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 103 */;
+		echo '/practiceInfo" 
+						class="btn btn-primary btn-lg btn-block fw-bold mt-auto mb-4" 
+						role="button">
 						EXIT
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>
-
-		<!-- <div class="d-grid">
-			<button class="btn btn-lg bt-100 btn-secondary bg-lightgreen rounded-4 text-black mt-3" x-on:click="console.log(questions)">
-				Log Questions
-			</button>
-		</div> -->
 		
 	</div>
 </div>

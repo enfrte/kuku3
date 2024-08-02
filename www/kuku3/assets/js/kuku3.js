@@ -1,9 +1,5 @@
 function getLatestPracticeData() {
 	return {
-		/* questions: [
-			{ native_phrase: 'Hello, world!', foreign_phrase: 'Hei, maailma!', native_phrase_array: ['Hello,', 'world!'], foreign_phrase_array: ['Hei,', 'maailma!'] },
-			{ native_phrase: 'Goodbye, world!', foreign_phrase: 'Heipä, maailma!', native_phrase_array: ['Goodbye,', 'world!'], foreign_phrase_array: ['Heipä,', 'maailma!'] }
-		] || [], */
 		questionNumber: 0,
 		progressPercent: 0,
 		question: '',
@@ -35,38 +31,9 @@ function getLatestPracticeData() {
 				}
 			}
 
-			// if (this.result === 'Incorrect') {
-			// 	this.checkAlternativeAnswers();
-			// }
-
 			this.resultMessage = this.questions[this.questionNumber]['foreign_phrase'];
 			this.nextQuestionModal = true;
 		},
-
-		// checkAlternativeAnswers: function() {
-		// 	//debugger;
-		// 	const ans = this.answerArray;
-		// 	const alt_arr = this.questions[this.questionNumber]['alternative_foreign_phrase'] || [];
-
-		// 	alt_arr.forEach(alt_arr_item => {
-		// 		this.result = 'Correct';
-
-		// 		if (alt_arr_item.length !== ans.length) {
-		// 			this.result = 'Incorrect';
-		// 		}
-		// 		else {
-		// 			for (let i = 0; i < alt_arr_item.length; i++) {
-		// 				if (alt_arr_item[i] !== ans[i].word) {
-		// 					this.result = 'Incorrect';
-		// 				}
-		// 			}
-		// 		}
-
-		// 		if (this.result === 'Correct') {
-		// 			return; // break out of forEach()
-		// 		}
-		// 	});
-		// },
 
 		addToAnswer: function(choice, id) {
 			//debugger;
@@ -110,39 +77,6 @@ function getLatestPracticeData() {
 			this.populateChoiceAnswerArea();
 		},
 
-		// shuffleChoices: function(randomWord = false) {
-		// 	//debugger;
-		// 	let array = this.choiceArray;
-
-		// 	if (randomWord) {
-		// 		const newChoiceObj = { id: (array.length), word: randomWord, hidden: false, width: 0, height: 0 }
-		// 		array.push(newChoiceObj);
-		// 	}
-			
-		// 	for (let i = array.length - 1; i > 0; i--) {
-		// 		const j = Math.floor(Math.random() * (i + 1));
-		// 		[array[i], array[j]] = [array[j], array[i]];
-		// 	}
-		// },
-
-		// // Generates a random word from a collection of unique words not found in the answer.
-		// generateRandomWord: function () {
-		// 	//debugger;
-		// 	let questions = this.questions;
-		// 	let uniqueWords = [];
-		// 	let currentQuestion = questions[this.questionNumber]['foreign_phrase_array'];
-
-		// 	questions.forEach(question => {
-		// 		question['foreign_phrase_array'].forEach( word => {
-		// 			if(uniqueWords.indexOf(word) === -1 && currentQuestion.indexOf(word) === -1) {
-		// 				uniqueWords.push(word); // Push if not already in array and also not in current question
-		// 			}
-		// 		} );
-		// 	});
-
-		// 	return uniqueWords[Math.floor(Math.random() * uniqueWords.length)];
-		// },
-
 		updateOffsets() {
 			//debugger;
 			const choiceButton = this.$refs.choiceButton;
@@ -150,16 +84,8 @@ function getLatestPracticeData() {
 			this.heightOffset = choiceButton.offsetHeight;
 		},
 
-		// foo: function (event, index, id) {
-		// 	//console.log(event.target.offsetWidth);
-		// 	//console.log('foo:', event, index, id);
-		// },
-
 		init: function () {
 			this.populateChoiceAnswerArea();
-			//this.updateOffsets();
-			//console.log(this.questions);
-			//console.log(this.choiceArray);
 		}
 	}
 }
@@ -168,6 +94,33 @@ function getLatestPracticeData() {
 document.addEventListener('htmx:responseError', event => {
 	const toastEl = document.getElementById('toast');
 	toastEl.querySelector('.toast-body').textContent = event.detail.xhr.responseText;
-	const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+	const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
 	toast.show();
 });
+
+// Function to split sentences in the textarea
+function splitSentences(textareaId) {
+	const textarea = document.getElementById(textareaId);
+	let text = textarea.value.replace(/(\r\n|\r|\n|“|"|”)/g, ' '); // Remove existing newlines and other things you don't want included.
+	text = text.replace(/ {2,}/g, ' '); // Remove 2 or more spaces
+	text = text.replace(/Radio \| Uutisviikko selkosuomeksi \|/g, 'Selkouutiset -');
+	text = text.replace(/TV \| Selkouutiset \|/g, 'Selkouutiset -');
+	text = text.replace(/(\s\|)/g, '.'); 
+	const datePattern = /(\d{1,2})\.(\d{1,2})\.(\d{4})/g; // convert date format dd.mm.yyyy to dd-mm-yyyy
+	text = text.replace(datePattern, (match, p1, p2, p3) => `${p1}-${p2}-${p3}`);
+
+	const exceptions = ['Mr','Mrs','Dr','Sr','Prof','St','Ave','Rd','Blvd']; // collect these from a form field
+	const exceptionsPattern = exceptions.join('|');
+	const pattern = new RegExp(`(.*?)(?<!${exceptionsPattern})[.!?\\]]`, 'g');
+	const sentences = text.match(pattern);
+	
+	if (sentences) {
+		const newText = sentences.map(sentence => sentence.trim()).join("\n");
+		textarea.value = newText;
+	}
+}
+
+function autoResize(textarea) {
+	textarea.style.height = 'auto'; // Reset the height to auto to calculate the new height
+	textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to match the content
+}

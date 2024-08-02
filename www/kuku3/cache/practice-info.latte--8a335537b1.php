@@ -40,13 +40,13 @@ final class Template_8a335537b1 extends Latte\Runtime\Template
 
 		echo '
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-	<div class="text-center">
+	<div class="text-center bg-dark text-white p-3">
 		<h2>Practice</h2>
 ';
 		if (!empty($title)) /* line 8 */ {
 			echo '			<a href="';
 			echo LR\Filters::escapeHtmlAttr(LR\Filters::safeUrl(Flight::get('basePath'))) /* line 9 */;
-			echo '/practice" class="btn btn-primary btn-lg btn-block mt-3">
+			echo '/practice" class="btn btn-primary btn-lg btn-block mt-3 text-white">
 				';
 			echo LR\Filters::escapeHtmlText($title) /* line 10 */;
 			echo '
