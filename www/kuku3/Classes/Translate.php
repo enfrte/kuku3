@@ -208,8 +208,8 @@ class Translate
 
 	public function getTranslationByDate(string $paginationIndex) {
 		// TODO: 
-		// Query group by date and give pagination index foreach date.
-		// Show this to the user. when the user clicks, we can use the same query to lookup the date by pagination index.
+		// Query - GROUP BY date and give pagination index foreach date.
+		// Show this to the user. When the user clicks, we can use the same query to lookup the date by pagination index.
 		// Then query the translations table by that date.
 	}
 

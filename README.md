@@ -10,7 +10,7 @@ Demo: https://codinginthecold.alwaysdata.net/kuku3/practiceInfo
 For AlwaysData hosting, comment out the .htaccess Redirect line. 
 
 ### Dev dependencies
-- Framework: Flight PHP.
+- Flight PHP: https://docs.flightphp.com/?lang=en 
 - HTMX: https://htmx.org/
 - AlpineJS: https://alpinejs.dev/
 - BootStrap 5: https://getbootstrap.com/
