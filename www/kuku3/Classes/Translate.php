@@ -3,7 +3,7 @@
 namespace Kuku3\Classes;
 
 use Kuku3\Classes\Security;
-use Kuku3\Classes\Controllers\ToastException;
+use Kuku3\Classes\ToastException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Flight;
@@ -185,7 +185,9 @@ class Translate
 
 
 	public function getLatestPractice() {
-		Flight::latte()->render('practice.latte', ['questions' => $this->getLatestPracticeData()]);
+		Flight::latte()->render('practice.latte', [
+			'questions' => $this->getLatestPracticeData(),
+		]);
 	}
 
 	// The latest practice info you click to access the practice
@@ -204,7 +206,10 @@ class Translate
 		$title = $latestTranslation[0]['source_line'];
 
 		VisitorInfo::insertVisitorInfo();
-		Flight::latte()->render('practice-info.latte', ['title' => $title]);
+		Flight::latte()->render('practice-info.latte', [
+			'title' => $title,
+			'visitorTotal' => VisitorInfo::getTotalNumberOfVisitors(),
+		]);
 	}
 	
 

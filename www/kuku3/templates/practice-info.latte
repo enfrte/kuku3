@@ -14,7 +14,9 @@
         {/if}
     </div>
     <div class="position-absolute bottom-0 mb-3">
-        <p>Visits since August 2024: </p>
+        {if isset($visitorTotal)}
+            <p>Visits since August 2024: {$visitorTotal}</p>
+        {/if}
     </div>
 </div>
 

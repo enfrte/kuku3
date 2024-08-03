@@ -5,6 +5,7 @@ namespace Kuku3\Classes\Controllers;
 use Flight;
 use PDO;
 use Kuku3\Classes\Security;
+use Kuku3\Classes\ToastException;
 
 class InstallController 
 {
@@ -38,16 +39,19 @@ class InstallController
 			// Execute each statement in the schema
 			foreach ($statements as $statement) {
 				if ($statement) {
-					$db->exec($statement);
+					$db->exec($statement.';');
 				}
 			}
+
+			echo $result;
 		}
-		catch (\Throwable $th) {
-			$result = 'Failed to create schema: '.$th->getMessage();
+		catch (\Exception $e) {
+			new ToastException($e);
 		}
-		finally {
-			Flight::latte()->render('home.latte', ['flash_msg' => $result]);
+		catch (\Throwable $t) {
+			new ToastException($t);
 		}
 	}
 
 }
+

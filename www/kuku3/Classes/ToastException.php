@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuku3\Classes\Controllers;
+namespace Kuku3\Classes;
 
 use Exception;
 

@@ -58,8 +58,14 @@ final class Template_8a335537b1 extends Latte\Runtime\Template
 		}
 		echo '    </div>
     <div class="position-absolute bottom-0 mb-3">
-        <p>Visits since August 2024: </p>
-    </div>
+';
+		if (isset($visitorTotal)) /* line 17 */ {
+			echo '            <p>Visits since August 2024: ';
+			echo LR\Filters::escapeHtmlText($visitorTotal) /* line 18 */;
+			echo '</p>
+';
+		}
+		echo '    </div>
 </div>
 
 ';

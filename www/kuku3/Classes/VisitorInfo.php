@@ -11,4 +11,11 @@ class VisitorInfo {
 			'INSERT INTO visitor (visit_date) VALUES (CURRENT_TIMESTAMP)'
 		);	
 	}
+
+	public static function getTotalNumberOfVisitors() {
+		$db = Flight::db();
+		$sql = 'SELECT COUNT(*) as total FROM visitor';
+		$totalNumberOfVisitors = $db->fetchField($sql);
+		return $totalNumberOfVisitors;
+	}
 }
