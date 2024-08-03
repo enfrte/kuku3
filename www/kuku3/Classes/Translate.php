@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Response;
 use Flight;
 use DateTime;
 use PDO;
+use Kuku3\Classes\VisitorInfo;
 
 class Translate 
 {
@@ -202,9 +203,10 @@ class Translate
 		$latestTranslation = $db->fetchAll($sql);
 		$title = $latestTranslation[0]['source_line'];
 
+		VisitorInfo::insertVisitorInfo();
 		Flight::latte()->render('practice-info.latte', ['title' => $title]);
 	}
-
+	
 
 	public function getTranslationByDate(string $paginationIndex) {
 		// TODO: 

@@ -19,10 +19,6 @@ class InstallController
 		if ( empty($_SESSION['logged_in']) || $_SESSION['logged_in'] == false ) { 
 			die('Requires access.');
 		}
-		
-		if (file_exists(__DIR__ . '/../../installed')) {
-			die('Database file exists.');
-		}
 
 		$result = "Success!";
 	
@@ -34,7 +30,7 @@ class InstallController
 				throw new \Exception("Could not get contents of schema file");
 			}
 
-			$db = new PDO('sqlite:database.sqlite');
+			$db = new PDO('sqlite:database.sqlite'); // path is in relation to index.php I guess
 
 			// Split the schema file into individual statements
 			$statements = array_filter(array_map('trim', explode(';', $schema)));
@@ -50,7 +46,6 @@ class InstallController
 			$result = 'Failed to create schema: '.$th->getMessage();
 		}
 		finally {
-			file_put_contents(__DIR__ . '/../../installed', ''); // tells app db has been installed
 			Flight::latte()->render('home.latte', ['flash_msg' => $result]);
 		}
 	}
