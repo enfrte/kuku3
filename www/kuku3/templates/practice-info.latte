@@ -4,16 +4,18 @@
 
 <div class="d-flex flex-column justify-content-center align-items-center position-relative" style="height: 100vh;">
     <div class="text-center bg-dark text-white p-3">
-        <h2>Practice</h2>
         {if !empty($title)}
-            <a href="{Flight::get('basePath')}/practice" class="btn btn-primary btn-lg btn-block mt-3 text-white">
+            <h2>Practice</h2>
+            <a href="{Flight::get('basePath')}/practice" hx-boost="true" class="btn btn-primary btn-lg btn-block mt-3 text-white">
                 {$title}
             </a>
         {else}
             <p class="lead">Could not fetch practice.</p>
+            <hr>
+            <p class="lead">Come back tomorrow.</p>
         {/if}
     </div>
-    <div class="position-absolute bottom-0 mb-3">
+    <div class="position-absolute bottom-0 mb-3 text-white">
         {if isset($visitorTotal)}
             <p>Visits since August 2024: {$visitorTotal}</p>
         {/if}

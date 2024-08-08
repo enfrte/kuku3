@@ -49,6 +49,11 @@ Flight::map('htmxResponse', function() {
     };
 });
 
+
+Flight::map('isHxRequest', function() {
+    return Flight::request()->getHeader('HX-Request') === 'true';
+});
+
 // Register the PDO helper class
 Flight::register('db', PdoWrapper::class, ['sqlite:database.sqlite', '', '', [
     // PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8mb4\'',
@@ -58,6 +63,7 @@ Flight::register('db', PdoWrapper::class, ['sqlite:database.sqlite', '', '', [
 ]]);
 
 Flight::route('/', [AccessController::class, 'index']);
+Flight::route('/test', [Translate::class, 'test']);
 Flight::route('/logout', [AccessController::class, 'logout']);
 Flight::route('/translation', [Translate::class, 'newTranslation']);
 Flight::route('/translate', [Translate::class, 'googleTranslate']);

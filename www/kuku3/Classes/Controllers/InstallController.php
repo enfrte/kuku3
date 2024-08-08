@@ -6,6 +6,8 @@ use Flight;
 use PDO;
 use Kuku3\Classes\Security;
 use Kuku3\Classes\ToastException;
+use Exception;
+
 
 class InstallController 
 {
@@ -21,7 +23,7 @@ class InstallController
 			die('Requires access.');
 		}
 
-		$result = "Success!";
+		$result = "Unknown!";
 	
 		try {
 			$schema_file = __DIR__ . '/../../schema.sql';
@@ -31,16 +33,35 @@ class InstallController
 				throw new \Exception("Could not get contents of schema file");
 			}
 
-			$db = new PDO('sqlite:database.sqlite'); // path is in relation to index.php I guess
-
+			$db = Flight::db();
+			$db->beginTransaction(); 
 			// Split the schema file into individual statements
 			$statements = array_filter(array_map('trim', explode(';', $schema)));
 
 			// Execute each statement in the schema
 			foreach ($statements as $statement) {
 				if ($statement) {
-					$db->exec($statement.';');
+					try {
+						$result = $db->exec($statement.';');
+						echo <<<HTML
+							<hr>
+							<p>Executed statement successfully: {$statement} </p>
+						HTML;
+					} catch (Exception $e) {
+						echo <<<HTML
+							<hr>
+							<pre>Error executing statement: {$statement}</pre>
+							<p>SQLite Error: {$e->getMessage()}</p>
+						HTML;
+					}
 				}
+			}
+
+			if ($db->commit()) {  // If all statements executed successfully, commit the transaction
+				$result = "<hr>Finished!";
+			} else {
+				$db->rollBack();  // If any statement failed, rollback the transaction
+				throw new \Exception('Error: Unable to execute schema file.');
 			}
 
 			echo $result;
@@ -49,7 +70,8 @@ class InstallController
 			new ToastException($e);
 		}
 		catch (\Throwable $t) {
-			new ToastException($t);
+			echo 'Throwable caught: ';
+			echo $t->getMessage();
 		}
 	}
 

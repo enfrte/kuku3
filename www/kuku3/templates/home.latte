@@ -2,26 +2,37 @@
 
 {block content}
 <div class="d-flex flex-column justify-content-center align-items-center bg-dark" style="height: 100vh;">
-	<a href="{Flight::get('basePath')}/translation" class="text-white text-decoration-none" style="min-width: 100%;">
+	<a href="{Flight::get('basePath')}/translation" hx-boost="true" class="text-white text-decoration-none" style="min-width: 100%;">
 		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
 				<h5 class="card-title mb-0 text-center text-white">NEW TRANSLATION</h5>
 			</div>
 		</div>
 	</a>
-	<a href="{Flight::get('basePath')}/practice" class="text-white text-decoration-none" style="min-width: 100%;">
+	<a href="{Flight::get('basePath')}/practice" hx-boost="true" class="text-white text-decoration-none" style="min-width: 100%;">
 		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
 				<h5 class="card-title mb-0 text-center text-white">PRACTICE</h5>
 			</div>
 		</div>
 	</a>
-	<a href="{Flight::get('basePath')}/logout" class="text-white text-decoration-none" style="min-width: 100%;">
+	<a href="{Flight::get('basePath')}/logout" hx-boost="true" class="text-white text-decoration-none" style="min-width: 100%;">
 		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
 			<div class="card-body">
 				<h5 class="card-title mb-0 text-center text-white">LOG OUT</h5>
 			</div>
 		</div>
 	</a>
+	<div 
+		hx-get="{Flight::get('basePath')}/test" 
+		hx-boost="true" 
+		class="text-white" 
+		style="min-width: 100%; cursor: pointer;">
+		<div class="p-3 menu-item bg-dark" style="min-width: 100%;">
+			<div class="card-body">
+				<h5 class="card-title mb-0 text-center text-white">TEST</h5>
+			</div>
+		</div>
+	</div>
 </div>
 {/block}

@@ -10,6 +10,7 @@ use Flight;
 use DateTime;
 use PDO;
 use Kuku3\Classes\VisitorInfo;
+use Kuku3\Classes\HtmxResponse;
 
 class Translate 
 {
@@ -19,6 +20,10 @@ class Translate
     {
         $this->client = new Client();
     }
+
+	public function test() {
+		HtmxResponse::renderNotification('testing');
+	}
 	
 	function googleTranslate(string $sourceLang = 'fi', string $targetLang = 'en') {
 		Security::authCheck();
@@ -203,7 +208,7 @@ class Translate
 				)';
 
 		$latestTranslation = $db->fetchAll($sql);
-		$title = $latestTranslation[0]['source_line'];
+		$title = $latestTranslation[0]['source_line'] ?? '';
 
 		VisitorInfo::insertVisitorInfo();
 		Flight::latte()->render('practice-info.latte', [
