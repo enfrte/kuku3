@@ -1,8 +1,15 @@
-# kuku3
+# kuku3 - Interactive reading of Yle's selkouutiset
 
-Interactive language learning
+This version of kuku allows you to interactively read Yle's selkouutiset, Finland's news in "simple Finnish". 
 
 Demo: https://codinginthecold.alwaysdata.net/kuku3/practiceInfo
+
+
+# Install
+
+Change config_sample.php to config.php and update the password.
+
+Run the install endpoint /install
 
 
 ### Dev tips
