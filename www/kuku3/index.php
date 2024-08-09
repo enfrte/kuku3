@@ -63,8 +63,9 @@ Flight::register('db', PdoWrapper::class, ['sqlite:database.sqlite', '', '', [
 ]]);
 
 Flight::route('/', [AccessController::class, 'index']);
-Flight::route('/test', [Translate::class, 'test']);
+Flight::route('/login', [AccessController::class, 'login']);
 Flight::route('/logout', [AccessController::class, 'logout']);
+Flight::route('/test', [Translate::class, 'test']);
 Flight::route('/translation', [Translate::class, 'newTranslation']);
 Flight::route('/translate', [Translate::class, 'googleTranslate']);
 Flight::route('/practiceInfo', [Translate::class, 'getLatestPracticeInfo']);

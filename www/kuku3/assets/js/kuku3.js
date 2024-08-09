@@ -1,3 +1,4 @@
+// AlpineJS logic for the practice page
 function getLatestPracticeData() {
 	return {
 		questionNumber: 0,
@@ -58,7 +59,6 @@ function getLatestPracticeData() {
 		populateChoiceAnswerArea: function() {
 			// debugger;
 			this.choiceArray = [...this.questions[this.questionNumber]['foreign_phrase_object']];
-			// this.shuffleChoices(this.generateRandomWord());
 			this.answerArray = [];
 		},
 
@@ -90,15 +90,15 @@ function getLatestPracticeData() {
 	}
 }
 
-// If there's an error response, show it in the toast
-document.addEventListener('htmx:responseError', event => {
-	const toastEl = document.getElementById('toast');
-	toastEl.querySelector('.toast-body').textContent = event.detail.xhr.responseText;
-	const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
-	toast.show();
-});
+// // If there's an error response, show it in the toast
+// document.addEventListener('htmx:responseError', event => {
+// 	const toastEl = document.getElementById('toast');
+// 	toastEl.querySelector('.toast-body').textContent = event.detail.xhr.responseText;
+// 	const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+// 	toast.show();
+// });
 
-// Function to split sentences in the textarea
+// Function to split sentences in the textarea in the article editor
 function splitSentences(textareaId) {
 	const textarea = document.getElementById(textareaId);
 	let text = textarea.value.replace(/(\r\n|\r|\n|“|"|”)/g, ' '); // Remove existing newlines and other things you don't want included.
@@ -120,6 +120,7 @@ function splitSentences(textareaId) {
 	}
 }
 
+// Function to auto resize textarea in the article editor
 function autoResize(textarea) {
 	textarea.style.height = 'auto'; // Reset the height to auto to calculate the new height
 	textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to match the content

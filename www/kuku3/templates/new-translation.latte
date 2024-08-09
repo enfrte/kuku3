@@ -13,9 +13,11 @@
 						class="btn btn-primary">
 						1. Fetch latest yle news
 					</button>
-					<button onclick="splitSentences('source')" type="button" class="btn btn-info">2. Format text</button>
+					<button onclick="splitSentences('source')" type="button" class="btn btn-info">
+						2. Format text
+					</button>
 					<button 
-§						hx-post="{Flight::get('basePath')}/translate" 
+						hx-post="{Flight::get('basePath')}/translate" 
 						hx-target="#translation"
 						hx-include="#source"
 						type="button" 

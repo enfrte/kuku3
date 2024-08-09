@@ -39,20 +39,19 @@
 {block content}{/block}
 
 <script>
-document.addEventListener('htmx:responseError', event => {
-	const toastEl = document.querySelector('.response-error-toast');
-	// const toastEl = document.getElementById('responseErrorToast');
-	toastEl.querySelector('.toast-body').textContent = event.detail.xhr.responseText;
-	const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-	toast.show();
-});
+// document.addEventListener('htmx:responseError', event => {
+// 	const toastEl = document.querySelector('.response-error-toast');
+// 	// const toastEl = document.getElementById('responseErrorToast');
+// 	toastEl.querySelector('.toast-body').textContent = event.detail.xhr.responseText;
+// 	const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+// 	toast.show();
+// });
 
 document.addEventListener('htmx:afterRequest', event => {
 	const toastEl = document.querySelector('.after-request-toast');
 	const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
 	toast.show();
 });
-
 </script>
 
 </body>

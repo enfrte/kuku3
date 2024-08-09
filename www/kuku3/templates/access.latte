@@ -3,7 +3,7 @@
 {block content}
 <div class="container mt-5 bg-dark text-white">
 	<h2 class="mb-5">Admin login</h2>
-	<form hx-post="{Flight::get('basePath')}/" hx-target="body" hx-trigger="submit" class="row g-3 text-white">
+	<form hx-post="{Flight::get('basePath')}/login" hx-target="body" hx-trigger="submit" class="row g-3 text-white">
 		<div class="col-auto">
 			<input name="password" type="password" class="form-control bg-dark text-white" placeholder="Password" autofocus>
 		</div>

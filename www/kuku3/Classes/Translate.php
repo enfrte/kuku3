@@ -5,10 +5,10 @@ namespace Kuku3\Classes;
 use Kuku3\Classes\Security;
 use Kuku3\Classes\ToastException;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
+// use GuzzleHttp\Psr7\Response;
 use Flight;
 use DateTime;
-use PDO;
+// use PDO;
 use Kuku3\Classes\VisitorInfo;
 use Kuku3\Classes\HtmxResponse;
 
@@ -88,7 +88,8 @@ class Translate
 				$db->runQuery("INSERT INTO translations (timestamp, source_line, translation_line) VALUES (?, ?, ?)", [$dbFormattedDate,  $sourceSentence, $translationSentence ]);
 			}
 
-			Flight::htmxResponse()->sendHtml('Saved');	
+			Flight::htmxResponse()->sendHtml('Saved'); // Update the button text
+			// HtmxResponse::renderNotification('Saved');
 		} catch (\Exception $e) {
 			new ToastException($e);
 		}
@@ -172,9 +173,19 @@ class Translate
 		// Add a random word from uniqueWords to foreign_phrase_object and shuffle
 		foreach ($questions as &$question) {
 			if (!empty($uniqueWords)) {
+				// THIS NEXT PART IS UNTESTED!!!
+				// TODO: TEST IT
+				// Add a random word, but try to avoid duplicates
+				for ($i=0; $i < 5; $i++) { // 5 attempts to avoid duplicates
+					$randomKey = array_rand($uniqueWords);
+					if (!in_array($uniqueWords[$randomKey], $question['foreign_phrase_array'])) {
+						break; // It's not in our array, we're done
+					}
+				}
+
 				$question['foreign_phrase_object'][] = [
 					'id' => count($question['foreign_phrase_object']),
-					'word' => $uniqueWords[array_rand($uniqueWords)],
+					'word' => $uniqueWords[$randomKey],
 					'hidden' => false,
 					'width' => 0,
 					'height' => 0
