@@ -5,7 +5,8 @@ namespace Kuku3\Classes\Controllers;
 use Flight;
 use PDO;
 use Kuku3\Classes\Security;
-use Kuku3\Classes\ToastException;
+// use Kuku3\Classes\ToastException;
+use Kuku3\Classes\HtmxResponse;
 use Exception;
 
 
@@ -67,7 +68,8 @@ class InstallController
 			echo $result;
 		}
 		catch (\Exception $e) {
-			new ToastException($e);
+			// new ToastException($e);
+			HtmxResponse::renderNotification($e->getMessage(), 'danger');
 		}
 		catch (\Throwable $t) {
 			echo 'Throwable caught: ';
@@ -76,4 +78,3 @@ class InstallController
 	}
 
 }
-

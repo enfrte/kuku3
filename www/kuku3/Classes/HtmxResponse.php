@@ -14,7 +14,7 @@ class HtmxResponse extends Response
 	 * Returns the response in the format that can be picked up by the toast listener.
 	 *
 	 * @param string $message
-	 * @param string $level - BS5 toast levels 
+	 * @param string $level - BS5 toast levels [primary, secondary, success, danger, warning, info, light, dark]
 	 * @param string $cssTarget - The place HTMX targets the responses
 	 * @return void
 	 */

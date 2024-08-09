@@ -3,7 +3,7 @@
 namespace Kuku3\Classes;
 
 use Kuku3\Classes\Security;
-use Kuku3\Classes\ToastException;
+// use Kuku3\Classes\ToastException;
 use GuzzleHttp\Client;
 // use GuzzleHttp\Psr7\Response;
 use Flight;
@@ -91,7 +91,8 @@ class Translate
 			Flight::htmxResponse()->sendHtml('Saved'); // Update the button text
 			// HtmxResponse::renderNotification('Saved');
 		} catch (\Exception $e) {
-			new ToastException($e);
+			// new ToastException($e);
+			HtmxResponse::renderNotification($e->getMessage(), 'danger');
 		}
 
 	}
