@@ -2,11 +2,9 @@
 
 {block content}
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" hx-boost="true" href="{Flight::get('basePath')}/practiceInfo">BACK</a>
-  </div>
-</nav>
+<div class="text-center mb-3 mt-3">
+	<a class="btn btn-secondary" hx-boost="true" href="{Flight::get('basePath')}/practiceInfo">BACK</a>
+</div>
 <div style="max-width: 1000px;" class="container bg-light" style="height: 100vh;" x-data='{ questions: {$questions} }'>
 	<div x-data="getLatestPracticeData()" class="pt-2">
 		<table class="table">
@@ -20,5 +18,8 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+<div class="text-center mb-3">
+	<a class="btn btn-secondary" hx-boost="true" href="{Flight::get('basePath')}/practiceInfo">BACK</a>
 </div>
 {/block}
