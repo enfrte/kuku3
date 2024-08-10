@@ -237,5 +237,12 @@ class Translate
 		// Then query the translations table by that date.
 	}
 
+
+	public function getLatestReadingPractice() {
+		Flight::latte()->render('reading-practice.latte', [
+			'questions' => $this->getLatestPracticeData(),
+		]);
+	}
+
 }
 

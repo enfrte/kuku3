@@ -69,6 +69,7 @@ Flight::route('/test', [Translate::class, 'test']);
 Flight::route('/translation', [Translate::class, 'newTranslation']);
 Flight::route('/translate', [Translate::class, 'googleTranslate']);
 Flight::route('/practiceInfo', [Translate::class, 'getLatestPracticeInfo']);
+Flight::route('/readingPractice', [Translate::class, 'getLatestReadingPractice']);
 Flight::route('/practice', [Translate::class, 'getLatestPractice']);
 Flight::route('/saveTranslation', [Translate::class, 'saveTranslation']);
 Flight::route('/home', [HomeController::class, 'index']);
