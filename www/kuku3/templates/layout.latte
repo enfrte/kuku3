@@ -49,8 +49,10 @@
 
 document.addEventListener('htmx:afterRequest', event => {
 	const toastEl = document.querySelector('.after-request-toast');
-	const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
-	toast.show();
+	if (toastEl) {
+		const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+		toast.show();
+	}
 });
 </script>
 
